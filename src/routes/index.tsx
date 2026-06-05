@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero-warehouse.jpg";
-import heroBg from "@/assets/images/hero-bg.png";
+import heroBg from "@/assets/images/hero-bg.jpg";
 import logoImg from "@/assets/logo.png";
 
 export const Route = createFileRoute("/")({
@@ -190,21 +190,16 @@ function Home() {
       </header>
 
       {/* HERO */}
-      <section id="kezdolap" className="relative min-h-[100vh] flex items-center pt-16">
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            backgroundImage: `url(${heroBg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white/80 lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:via-55% lg:to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white to-transparent" />
-        </div>
+      <section id="kezdolap" className="relative overflow-hidden min-h-[100vh] flex items-center pt-16">
+        <img
+          src={heroBg}
+          alt="Horváth Tüzép telephely és cégtábla"
+          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none z-0"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white/80 lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:via-50% lg:to-transparent z-10" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white to-transparent z-10" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full relative z-20">
           <div className="max-w-2xl text-black">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-medium text-primary mb-6">
               <span className="h-2 w-2 rounded-full bg-cta" />
