@@ -49,6 +49,7 @@ const nav = [
   { href: "#kezdolap", label: "Kezdőlap" },
   { href: "#termekek", label: "Termékek" },
   { href: "#rolunk", label: "Rólunk" },
+  { href: "#partnereink", label: "Partnereink" },
   { href: "#kapcsolat", label: "Kapcsolat" },
 ];
 
@@ -101,6 +102,19 @@ const locations = [
     fax: "+36 45 500 274",
     mapUrl: "https://www.google.com/maps/place/Kisv%C3%A1rda,+H%C3%A1rmas+%C3%BAt+2,+4600/@48.2292769,22.0902497,17z/data=!3m1!4b1!4m6!3m5!1s0x4738ecffeddf663d:0xa2598261b775be60!8m2!3d48.2292734!4d22.0928246!16s%2Fg%2F11hdnky4lh?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D",
   },
+];
+
+const partners = [
+  { name: "Wienerberger", color: "hover:text-[#E2001A]", style: "font-black tracking-tighter" },
+  { name: "Leier", color: "hover:text-[#007A33]", style: "font-bold tracking-widest uppercase" },
+  { name: "Ytong", color: "hover:text-[#D99B00]", style: "font-extrabold tracking-normal lowercase italic" },
+  { name: "Baumit", color: "hover:text-[#003B7E]", style: "font-semibold tracking-wide uppercase" },
+  { name: "Mapei", color: "hover:text-[#005CA9]", style: "font-black tracking-widest uppercase italic" },
+  { name: "Terrán", color: "hover:text-[#8B2332]", style: "font-medium tracking-widest uppercase" },
+  { name: "Bramac", color: "hover:text-[#E30613]", style: "font-extrabold tracking-tight uppercase" },
+  { name: "Austrotherm", color: "hover:text-[#005CA9]", style: "font-bold tracking-tight uppercase italic" },
+  { name: "Rockwool", color: "hover:text-[#C8102E]", style: "font-extrabold tracking-widest uppercase" },
+  { name: "Velux", color: "hover:text-[#E30613]", style: "font-black tracking-normal uppercase" },
 ];
 
 function Home() {
@@ -369,6 +383,29 @@ function Home() {
                 termék közül választhat egy helyen
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PARTNERS */}
+      <section id="partnereink" className="py-20 lg:py-28 bg-secondary border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-black">Kiemelt gyártó partnereink</h2>
+            <p className="mt-4 text-black max-w-xl mx-auto">
+              Kizárólag megbízható, piacvezető gyártók minőségi termékeit forgalmazzuk.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 md:gap-x-16 lg:gap-x-20 py-4">
+            {partners.map((p) => (
+              <div
+                key={p.name}
+                className={`text-gray-400/80 transition-all duration-300 filter grayscale contrast-50 hover:grayscale-0 hover:contrast-100 hover:scale-105 cursor-default select-none ${p.color} ${p.style} text-xl sm:text-2xl lg:text-3xl`}
+              >
+                {p.name}
+              </div>
+            ))}
           </div>
         </div>
       </section>
