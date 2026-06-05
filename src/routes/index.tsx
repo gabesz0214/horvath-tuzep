@@ -578,7 +578,9 @@ function Home() {
                 </li>
                 <li>
                   <a
-                    href="mailto:gabor.h077@gmail.com"
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=gabor.h077@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-cta transition-colors"
                   >
                     gabor.h077@gmail.com
