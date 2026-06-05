@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -46,11 +46,11 @@ export const Route = createFileRoute("/")({
 });
 
 const nav = [
-  { href: "#kezdolap", label: "Kezdőlap" },
-  { href: "#termekek", label: "Termékek" },
-  { href: "#rolunk", label: "Rólunk" },
-  { href: "#partnereink", label: "Partnereink" },
-  { href: "#kapcsolat", label: "Kapcsolat" },
+  { to: "/", hash: "kezdolap", label: "Kezdőlap" },
+  { to: "/", hash: "termekek", label: "Termékek" },
+  { to: "/", hash: "rolunk", label: "Rólunk" },
+  { to: "/partnereink", label: "Partnereink" },
+  { to: "/", hash: "kapcsolat", label: "Kapcsolat" },
 ];
 
 const values = [
@@ -104,19 +104,6 @@ const locations = [
   },
 ];
 
-const partners = [
-  { name: "Wienerberger", color: "hover:text-[#E2001A]", style: "font-black tracking-tighter" },
-  { name: "Leier", color: "hover:text-[#007A33]", style: "font-bold tracking-widest uppercase" },
-  { name: "Ytong", color: "hover:text-[#D99B00]", style: "font-extrabold tracking-normal lowercase italic" },
-  { name: "Baumit", color: "hover:text-[#003B7E]", style: "font-semibold tracking-wide uppercase" },
-  { name: "Mapei", color: "hover:text-[#005CA9]", style: "font-black tracking-widest uppercase italic" },
-  { name: "Terrán", color: "hover:text-[#8B2332]", style: "font-medium tracking-widest uppercase" },
-  { name: "Bramac", color: "hover:text-[#E30613]", style: "font-extrabold tracking-tight uppercase" },
-  { name: "Austrotherm", color: "hover:text-[#005CA9]", style: "font-bold tracking-tight uppercase italic" },
-  { name: "Rockwool", color: "hover:text-[#C8102E]", style: "font-extrabold tracking-widest uppercase" },
-  { name: "Velux", color: "hover:text-[#E30613]", style: "font-black tracking-normal uppercase" },
-];
-
 function Home() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -137,23 +124,24 @@ function Home() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <a href="#kezdolap" className="flex items-center gap-3">
+          <Link to="/" hash="kezdolap" className="flex items-center gap-3">
             <img src={logoImg} alt="Horváth Tüzép logo" className="h-10 w-auto object-contain" />
             <div className="leading-tight">
               <div className="font-semibold text-black">Horváth Tüzép</div>
               <div className="text-[11px] text-black -mt-0.5">Építőanyag kereskedés</div>
             </div>
-          </a>
+          </Link>
 
           <nav className="hidden md:flex items-center gap-8">
             {nav.map((n) => (
-              <a
-                key={n.href}
-                href={n.href}
-                className="text-sm font-medium text-primary hover:text-cta transition-colors"
+              <Link
+                key={n.label}
+                to={n.to}
+                hash={n.hash}
+                className="text-sm font-medium text-primary hover:text-cta transition-colors [&.active]:text-cta"
               >
                 {n.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -162,7 +150,7 @@ function Home() {
               asChild
               className="bg-primary text-white hover:bg-primary/90 shadow-sm"
             >
-              <a href="#kapcsolat">Árajánlatkérés</a>
+              <Link to="/" hash="kapcsolat">Árajánlatkérés</Link>
             </Button>
           </div>
 
@@ -179,19 +167,20 @@ function Home() {
           <div className="md:hidden bg-background border-t border-border">
             <div className="px-4 py-4 flex flex-col gap-3">
               {nav.map((n) => (
-                <a
-                  key={n.href}
-                  href={n.href}
+                <Link
+                  key={n.label}
+                  to={n.to}
+                  hash={n.hash}
                   onClick={() => setOpen(false)}
-                  className="text-sm font-medium py-2 text-primary hover:text-cta"
+                  className="text-sm font-medium py-2 text-primary hover:text-cta [&.active]:text-cta"
                 >
                   {n.label}
-                </a>
+                </Link>
               ))}
               <Button asChild className="bg-primary text-white hover:bg-primary/90 w-full">
-                <a href="#kapcsolat" onClick={() => setOpen(false)}>
+                <Link to="/" hash="kapcsolat" onClick={() => setOpen(false)}>
                   Árajánlatkérés
-                </a>
+                </Link>
               </Button>
             </div>
           </div>
@@ -387,29 +376,6 @@ function Home() {
         </div>
       </section>
 
-      {/* PARTNERS */}
-      <section id="partnereink" className="py-20 lg:py-28 bg-secondary border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-black">Kiemelt gyártó partnereink</h2>
-            <p className="mt-4 text-black max-w-xl mx-auto">
-              Kizárólag megbízható, piacvezető gyártók minőségi termékeit forgalmazzuk.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 md:gap-x-16 lg:gap-x-20 py-4">
-            {partners.map((p) => (
-              <div
-                key={p.name}
-                className={`text-gray-400/80 transition-all duration-300 filter grayscale contrast-50 hover:grayscale-0 hover:contrast-100 hover:scale-105 cursor-default select-none ${p.color} ${p.style} text-xl sm:text-2xl lg:text-3xl`}
-              >
-                {p.name}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CONTACT */}
       <section id="kapcsolat" className="py-20 lg:py-28 bg-background text-black border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -510,10 +476,14 @@ function Home() {
               </div>
               <ul className="mt-4 space-y-2 text-sm text-black">
                 {nav.map((n) => (
-                  <li key={n.href}>
-                    <a href={n.href} className="text-primary hover:text-cta transition-colors font-medium">
+                  <li key={n.label}>
+                    <Link
+                      to={n.to}
+                      hash={n.hash}
+                      className="text-primary hover:text-cta transition-colors font-medium [&.active]:text-cta"
+                    >
                       {n.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
