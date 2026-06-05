@@ -33,6 +33,7 @@ const nav = [
   { to: "/", hash: "termekek", label: "Termékek" },
   { to: "/", hash: "rolunk", label: "Rólunk" },
   { to: "/partnereink", label: "Partnereink" },
+  { to: "/palyazatok", label: "Pályázatok" },
   { to: "/", hash: "kapcsolat", label: "Kapcsolat" },
 ];
 

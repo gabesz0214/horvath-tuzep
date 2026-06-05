@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PartnereinkRouteImport } from './routes/partnereink'
+import { Route as PalyazatokRouteImport } from './routes/palyazatok'
 import { Route as IndexRouteImport } from './routes/index'
 
 const PartnereinkRoute = PartnereinkRouteImport.update({
   id: '/partnereink',
   path: '/partnereink',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PalyazatokRoute = PalyazatokRouteImport.update({
+  id: '/palyazatok',
+  path: '/palyazatok',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +31,31 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/palyazatok': typeof PalyazatokRoute
   '/partnereink': typeof PartnereinkRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/palyazatok': typeof PalyazatokRoute
   '/partnereink': typeof PartnereinkRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/palyazatok': typeof PalyazatokRoute
   '/partnereink': typeof PartnereinkRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/partnereink'
+  fullPaths: '/' | '/palyazatok' | '/partnereink'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/partnereink'
-  id: '__root__' | '/' | '/partnereink'
+  to: '/' | '/palyazatok' | '/partnereink'
+  id: '__root__' | '/' | '/palyazatok' | '/partnereink'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PalyazatokRoute: typeof PalyazatokRoute
   PartnereinkRoute: typeof PartnereinkRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/partnereink'
       fullPath: '/partnereink'
       preLoaderRoute: typeof PartnereinkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/palyazatok': {
+      id: '/palyazatok'
+      path: '/palyazatok'
+      fullPath: '/palyazatok'
+      preLoaderRoute: typeof PalyazatokRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PalyazatokRoute: PalyazatokRoute,
   PartnereinkRoute: PartnereinkRoute,
 }
 export const routeTree = rootRouteImport
