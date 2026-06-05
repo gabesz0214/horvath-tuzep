@@ -159,7 +159,7 @@ function Home() {
       if (res.success) {
         setFormStatus("success");
         setFormData({ name: "", email: "", phone: "", message: "" });
-        toast.success("Ajánlatkérés sikeresen elküldve! Ellenőrizze e-mail fiókját a visszaigazolásért.");
+        toast.success("Ajánlatkérés sikeresen elküldve!");
       } else {
         setFormStatus("error");
         toast.error("Hiba történt az adatok küldése során.");
