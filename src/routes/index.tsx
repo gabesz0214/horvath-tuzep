@@ -92,12 +92,14 @@ const locations = [
     address: "4800 Vásárosnamény, Ilki út 1.",
     phone: "+36 45 570 260",
     fax: "+36 45 570 261",
+    mapUrl: "https://www.google.com/maps/place/V%C3%A1s%C3%A1rosnam%C3%A9ny,+Ilki+%C3%BAt+1,+4800/@48.1281288,22.3008288,17z/data=!3m1!4b1!4m6!3m5!1s0x47388abee465c619:0x4b658e48eb68beb8!8m2!3d48.1281252!4d22.3034037!16s%2Fg%2F11h23l5kkc?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D",
   },
   {
     city: "Kisvárda",
     address: "4600 Kisvárda, Hármas út 2.",
     phone: "+36 45 500 275",
     fax: "+36 45 500 274",
+    mapUrl: "https://www.google.com/maps/place/Kisv%C3%A1rda,+H%C3%A1rmas+%C3%BAt+2,+4600/@48.2292769,22.0902497,17z/data=!3m1!4b1!4m6!3m5!1s0x4738ecffeddf663d:0xa2598261b775be60!8m2!3d48.2292734!4d22.0928246!16s%2Fg%2F11hdnky4lh?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D",
   },
 ];
 
@@ -398,10 +400,15 @@ function Home() {
                   <h3 className="text-xl font-semibold text-black">{loc.city}</h3>
                 </div>
                 <div className="mt-5 space-y-3 text-sm text-black">
-                  <div className="flex items-start gap-3">
-                    <MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" />
-                    <span>{loc.address}</span>
-                  </div>
+                  <a
+                    href={loc.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-3 hover:text-cta transition-colors text-black group/addr"
+                  >
+                    <MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0 group-hover/addr:text-cta transition-colors" />
+                    <span className="hover:underline">{loc.address}</span>
+                  </a>
                   <a href={`tel:${loc.phone.replace(/\s/g, "")}`} className="flex items-start gap-3 hover:text-cta transition-colors text-black">
                     <Phone className="h-4 w-4 mt-0.5 text-primary shrink-0" />
                     <span className="font-semibold text-lg text-black">{loc.phone}</span>
@@ -441,16 +448,6 @@ function Home() {
               </div>
             </Card>
           </div>
-
-          {/* Map placeholder */}
-          <div className="mt-10 rounded-2xl overflow-hidden border border-white/10 aspect-[21/9] bg-white/5 grid place-items-center relative">
-            <iframe
-              title="Térkép"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=22.30%2C48.10%2C22.35%2C48.15&layer=mapnik&marker=48.125%2C22.325"
-              className="w-full h-full grayscale-[0.3] opacity-90"
-              loading="lazy"
-            />
-          </div>
         </div>
       </section>
 
@@ -487,9 +484,31 @@ function Home() {
                 Elérhetőség
               </div>
               <ul className="mt-4 space-y-2 text-sm text-black">
-                <li>4800 Vásárosnamény, Ilki út 1.</li>
-                <li>4600 Kisvárda, Hármas út 2.</li>
-                <li>info@horvathtuzep.hu</li>
+                <li>
+                  <a
+                    href="https://www.google.com/maps/place/V%C3%A1s%C3%A1rosnam%C3%A9ny,+Ilki+%C3%BAt+1,+4800/@48.1281288,22.3008288,17z/data=!3m1!4b1!4m6!3m5!1s0x47388abee465c619:0x4b658e48eb68beb8!8m2!3d48.1281252!4d22.3034037!16s%2Fg%2F11h23l5kkc?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-cta transition-colors"
+                  >
+                    4800 Vásárosnamény, Ilki út 1.
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.google.com/maps/place/Kisv%C3%A1rda,+H%C3%A1rmas+%C3%BAt+2,+4600/@48.2292769,22.0902497,17z/data=!3m1!4b1!4m6!3m5!1s0x4738ecffeddf663d:0xa2598261b775be60!8m2!3d48.2292734!4d22.0928246!16s%2Fg%2F11hdnky4lh?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-cta transition-colors"
+                  >
+                    4600 Kisvárda, Hármas út 2.
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:info@horvathtuzep.hu" className="hover:text-cta transition-colors">
+                    info@horvathtuzep.hu
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
