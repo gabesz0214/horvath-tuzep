@@ -134,7 +134,7 @@ function Home() {
               <a
                 key={n.href}
                 href={n.href}
-                className="text-sm font-medium text-black hover:text-black/70 transition-colors"
+                className="text-sm font-medium text-primary hover:text-cta transition-colors"
               >
                 {n.label}
               </a>
@@ -144,7 +144,7 @@ function Home() {
           <div className="hidden md:block">
             <Button
               asChild
-              className="bg-black text-white hover:bg-black/90 shadow-sm"
+              className="bg-primary text-white hover:bg-primary/90 shadow-sm"
             >
               <a href="#kapcsolat">Árajánlatkérés</a>
             </Button>
@@ -167,12 +167,12 @@ function Home() {
                   key={n.href}
                   href={n.href}
                   onClick={() => setOpen(false)}
-                  className="text-sm font-medium py-2 text-black"
+                  className="text-sm font-medium py-2 text-primary hover:text-cta"
                 >
                   {n.label}
                 </a>
               ))}
-              <Button asChild className="bg-black text-white hover:bg-black/90 w-full">
+              <Button asChild className="bg-primary text-white hover:bg-primary/90 w-full">
                 <a href="#kapcsolat" onClick={() => setOpen(false)}>
                   Árajánlatkérés
                 </a>
@@ -197,14 +197,14 @@ function Home() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
           <div className="max-w-2xl text-black">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 border border-black/10 text-xs font-medium text-black mb-6">
-              <span className="h-2 w-2 rounded-full bg-black" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-medium text-primary mb-6">
+              <span className="h-2 w-2 rounded-full bg-cta" />
               Közel 20 éve az építkezők szolgálatában
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] text-black">
               Minőségi építőanyagok
               <br />
-              <span className="text-black underline decoration-2 decoration-black">egyenesen a raktárról</span>
+              <span className="text-cta">egyenesen a raktárról</span>
             </h1>
             <p className="mt-6 text-lg text-black max-w-xl">
               Több mint 10.000 termék, szakértő tanácsadás és gyors kiszállítás Vásárosnaményból
@@ -214,7 +214,7 @@ function Home() {
               <Button
                 asChild
                 size="lg"
-                className="bg-black text-white hover:bg-black/90 h-12 px-6"
+                className="bg-cta text-white hover:bg-cta/90 h-12 px-6"
               >
                 <a href="#termekek">
                   Termékeink <ArrowRight />
@@ -224,7 +224,7 @@ function Home() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="h-12 px-6 bg-transparent border-black/40 text-black hover:bg-black hover:text-white"
+                className="h-12 px-6 bg-transparent border-primary text-primary hover:bg-primary hover:text-white transition-colors"
               >
                 <a href="#kapcsolat">Kapcsolatfelvétel</a>
               </Button>
@@ -237,7 +237,7 @@ function Home() {
                 { v: "2", l: "telephely" },
               ].map((s) => (
                 <div key={s.l}>
-                  <div className="text-2xl sm:text-3xl font-bold text-black">{s.v}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-primary">{s.v}</div>
                   <div className="text-xs sm:text-sm text-black">{s.l}</div>
                 </div>
               ))}
@@ -250,7 +250,7 @@ function Home() {
       <section className="py-20 lg:py-28 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
-            <div className="text-sm font-semibold text-black uppercase tracking-wider">Miért minket?</div>
+            <div className="text-sm font-bold text-cta uppercase tracking-wider">Miért minket?</div>
             <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-black">
               Megbízható partner az építkezéséhez
             </h2>
@@ -264,9 +264,9 @@ function Home() {
             {values.map((v) => (
               <Card
                 key={v.title}
-                className="p-6 border-border hover:border-black/30 hover:shadow-md transition-all text-black"
+                className="p-6 border-border hover:border-primary/30 hover:shadow-md transition-all text-black"
               >
-                <div className="h-12 w-12 rounded-lg bg-black/5 text-black grid place-items-center">
+                <div className="h-12 w-12 rounded-lg bg-primary/10 text-primary grid place-items-center">
                   <v.icon className="h-6 w-6" />
                 </div>
                 <h3 className="mt-5 font-semibold text-lg text-black">{v.title}</h3>
@@ -282,7 +282,7 @@ function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
-              <div className="text-sm font-semibold text-black uppercase tracking-wider">
+              <div className="text-sm font-bold text-cta uppercase tracking-wider">
                 Termékkategóriák
               </div>
               <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-black">
@@ -293,7 +293,7 @@ function Home() {
                 A termékek jelentős része készletről azonnal elvihető.
               </p>
             </div>
-            <Button asChild variant="outline" className="border-black text-black hover:bg-black hover:text-white">
+            <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white transition-colors">
               <a href="#kapcsolat">Teljes kínálat <ArrowRight /></a>
             </Button>
           </div>
@@ -302,9 +302,9 @@ function Home() {
             {categories.map((c) => (
               <Card
                 key={c.title}
-                className="group p-6 bg-card border-border hover:-translate-y-1 hover:shadow-lg hover:border-black/40 transition-all duration-300 cursor-pointer text-black"
+                className="group p-6 bg-card border-border hover:-translate-y-1 hover:shadow-lg hover:border-primary/20 transition-all duration-300 cursor-pointer text-black"
               >
-                <div className="h-12 w-12 rounded-lg bg-black/5 text-black grid place-items-center group-hover:bg-black group-hover:text-white transition-colors">
+                <div className="h-12 w-12 rounded-lg bg-primary/10 text-primary grid place-items-center group-hover:bg-cta group-hover:text-white transition-colors duration-300">
                   <c.icon className="h-6 w-6" />
                 </div>
                 <h3 className="mt-5 font-semibold text-black">{c.title}</h3>
@@ -319,13 +319,13 @@ function Home() {
       <section id="rolunk" className="py-20 lg:py-28 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center text-black">
           <div>
-            <div className="text-sm font-semibold text-black uppercase tracking-wider">Rólunk</div>
+            <div className="text-sm font-bold text-cta uppercase tracking-wider">Rólunk</div>
             <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-black">
               Csaknem 20 éve építünk együtt Önnel
             </h2>
             <div className="mt-6 space-y-4 text-black leading-relaxed">
               <p>
-                Üdvözli Önt a <span className="text-black font-semibold">Horváth Tüzép Kft.</span>{" "}
+                Üdvözli Önt a <span className="text-cta font-bold">Horváth Tüzép Kft.</span>{" "}
                 valamennyi dolgozója. Cégünk munkatársai immár csaknem 20 éve azon dolgoznak,
                 hogy Ön élete egyik legnagyobb beruházását — álmai otthonát — minél könnyebben,
                 gazdaságosabban és korszerűbben valósíthassa meg.
@@ -342,8 +342,8 @@ function Home() {
                 { v: "10.000+", l: "termék raktáron" },
                 { v: "2", l: "telephely" },
               ].map((s) => (
-                <div key={s.l} className="border-l-2 border-black pl-4">
-                  <div className="text-2xl font-bold text-black">{s.v}</div>
+                <div key={s.l} className="border-l-2 border-cta pl-4">
+                  <div className="text-2xl font-bold text-primary">{s.v}</div>
                   <div className="text-xs text-black">{s.l}</div>
                 </div>
               ))}
@@ -361,8 +361,8 @@ function Home() {
                 className="w-full h-full object-cover opacity-90"
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-white border border-black text-black p-6 rounded-xl shadow-xl max-w-[240px] hidden sm:block">
-              <div className="text-3xl font-bold">10.000+</div>
+            <div className="absolute -bottom-6 -left-6 bg-white border border-border text-black p-6 rounded-xl shadow-xl max-w-[240px] hidden sm:block">
+              <div className="text-3xl font-bold text-primary">10.000+</div>
               <div className="text-sm mt-1 text-black">
                 termék közül választhat egy helyen
               </div>
@@ -375,7 +375,7 @@ function Home() {
       <section id="kapcsolat" className="py-20 lg:py-28 bg-background text-black border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl text-black">
-            <div className="text-sm font-semibold text-black uppercase tracking-wider">Kapcsolat</div>
+            <div className="text-sm font-bold text-cta uppercase tracking-wider">Kapcsolat</div>
             <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-black">
               Keressen minket bizalommal
             </h2>
@@ -389,33 +389,33 @@ function Home() {
             {locations.map((loc) => (
               <Card
                 key={loc.city}
-                className="p-6 bg-white text-black border-border shadow-sm"
+                className="p-6 bg-white text-black border-border shadow-sm hover:border-primary/20 transition-all duration-300"
               >
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-lg bg-black text-white grid place-items-center">
+                  <div className="h-10 w-10 rounded-lg bg-primary text-white grid place-items-center">
                     <MapPin className="h-5 w-5" />
                   </div>
                   <h3 className="text-xl font-semibold text-black">{loc.city}</h3>
                 </div>
                 <div className="mt-5 space-y-3 text-sm text-black">
                   <div className="flex items-start gap-3">
-                    <MapPin className="h-4 w-4 mt-0.5 text-black shrink-0" />
+                    <MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" />
                     <span>{loc.address}</span>
                   </div>
-                  <a href={`tel:${loc.phone.replace(/\s/g, "")}`} className="flex items-start gap-3 hover:text-black/70 transition-colors text-black">
-                    <Phone className="h-4 w-4 mt-0.5 text-black shrink-0" />
+                  <a href={`tel:${loc.phone.replace(/\s/g, "")}`} className="flex items-start gap-3 hover:text-cta transition-colors text-black">
+                    <Phone className="h-4 w-4 mt-0.5 text-primary shrink-0" />
                     <span className="font-semibold text-lg text-black">{loc.phone}</span>
                   </a>
                   <div className="flex items-start gap-3 text-black">
-                    <span className="text-xs mt-1 shrink-0 text-black">FAX</span>
+                    <span className="text-xs mt-1 shrink-0 text-primary">FAX</span>
                     <span>{loc.fax}</span>
                   </div>
                 </div>
               </Card>
             ))}
 
-            <Card className="p-6 bg-white text-black border-border shadow-sm">
-              <div className="h-10 w-10 rounded-lg bg-black/5 text-black grid place-items-center">
+            <Card className="p-6 bg-white text-black border-border shadow-sm hover:border-primary/20 transition-all duration-300">
+              <div className="h-10 w-10 rounded-lg bg-primary/10 text-primary grid place-items-center">
                 <Clock className="h-5 w-5" />
               </div>
               <h3 className="mt-4 text-xl font-semibold text-black">Nyitvatartás</h3>
@@ -434,9 +434,9 @@ function Home() {
               <div className="mt-6 pt-6 border-t border-gray-200">
                 <a
                   href="mailto:info@horvathtuzep.hu"
-                  className="flex items-center gap-2 font-semibold text-black hover:underline"
+                  className="flex items-center gap-2 font-semibold text-black hover:text-cta transition-colors"
                 >
-                  <Mail className="h-4 w-4" /> info@horvathtuzep.hu
+                  <Mail className="h-4 w-4 text-primary" /> info@horvathtuzep.hu
                 </a>
               </div>
             </Card>
@@ -475,7 +475,7 @@ function Home() {
               <ul className="mt-4 space-y-2 text-sm text-black">
                 {nav.map((n) => (
                   <li key={n.href}>
-                    <a href={n.href} className="text-black hover:text-black/70 transition-colors">
+                    <a href={n.href} className="text-primary hover:text-cta transition-colors font-medium">
                       {n.label}
                     </a>
                   </li>
