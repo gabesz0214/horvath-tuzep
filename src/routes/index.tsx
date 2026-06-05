@@ -251,22 +251,22 @@ function Home() {
 
       {/* HERO */}
       <section id="kezdolap" className="relative min-h-[100vh] flex items-center pt-24 pb-16 bg-white overflow-hidden">
-        {/* Háttér dekorációs finom vonalak (bal alulról indulva) */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
-          {/* Vékony vonal (h-1 / 4px): nagyon halvány tüzép-vörös */}
+        {/* Jobb oldali háttér dekorációs sávok (bal oldalt tisztán hagyva) */}
+        <div className="absolute top-0 right-0 w-[50%] h-full z-0 pointer-events-none overflow-hidden select-none hidden lg:block">
+          {/* Első sáv: vékonyabb */}
           <div 
-            className="absolute bottom-[8%] left-[-5%] w-[150%] h-[4px] origin-bottom-left" 
+            className="absolute top-[-20%] left-[-20%] w-[160%] h-[35px] origin-top-left" 
             style={{ 
-              transform: "rotate(-15deg)",
+              transform: "rotate(-35deg)",
               backgroundColor: "rgba(184, 58, 48, 0.04)" 
             }}
           />
-          {/* Vastagabb vonal (h-4 / 16px): nagyon halvány szürke */}
+          {/* Második sáv: vastagabb */}
           <div 
-            className="absolute bottom-[8%] left-[-5%] w-[150%] h-[16px] origin-bottom-left" 
+            className="absolute top-[-20%] left-[-20%] w-[160%] h-[85px] origin-top-left" 
             style={{ 
-              transform: "rotate(-15deg) translateY(-40px)",
-              backgroundColor: "rgba(156, 163, 175, 0.05)" 
+              transform: "rotate(-35deg) translateY(120px)",
+              backgroundColor: "rgba(184, 58, 48, 0.03)" 
             }}
           />
         </div>
