@@ -20,6 +20,8 @@ import {
   Home as HomeIcon,
   Menu,
   X,
+  Calculator,
+  Users,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero-warehouse.jpg";
@@ -74,6 +76,29 @@ const values = [
     icon: Warehouse,
     title: "Azonnal elvihető",
     text: "A termékek jelentős része készletről, telephelyünkről azonnal elvihető.",
+  },
+];
+
+const services = [
+  {
+    icon: Truck,
+    title: "Darus kiszállítás",
+    text: "Saját gépparkunkkal és darus teherautóinkkal a legnehezebb alapanyagokat is pontosan a munkaterületre szállítjuk.",
+  },
+  {
+    icon: Calculator,
+    title: "Anyagszükséglet számítás",
+    text: "Hozd el vagy küldd el nekünk a tervrajzot, és szakértő csapatunk pontosan kiszámolja a szükséges anyagmennyiséget.",
+  },
+  {
+    icon: Layers,
+    title: "Hatalmas raktárkészlet",
+    text: "Több mint 10.000 termékünk jelentős része azonnal, raktárról elérhető, így az építkezés egy percet sem csúszik.",
+  },
+  {
+    icon: Users,
+    title: "Szakértő tanácsadás",
+    text: "Közel 20 év szakmai tapasztalattal segítünk kiválasztani a legmegfelelőbb és leggazdaságosabb építőanyagokat.",
   },
 ];
 
@@ -189,10 +214,10 @@ function Home() {
       </header>
 
       {/* HERO */}
-      <section id="kezdolap" className="relative min-h-[100vh] flex items-center pt-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
-          <div className="max-w-2xl text-black">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-medium text-primary mb-6">
+      <section id="kezdolap" className="relative min-h-[100vh] flex items-center pt-24 pb-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-7 flex flex-col text-black">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-medium text-primary mb-6 self-start">
               <span className="h-2 w-2 rounded-full bg-cta" />
               Közel 20 éve az építkezők szolgálatában
             </div>
@@ -225,6 +250,31 @@ function Home() {
               </Button>
             </div>
 
+            {/* Service Cards (Mobile view: stacked underneath the buttons) */}
+            <div className="mt-12 lg:hidden">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {services.map((s) => {
+                  const Icon = s.icon;
+                  return (
+                    <div
+                      key={s.title}
+                      className="bg-white border border-gray-100 shadow-sm rounded-xl p-5 flex flex-col gap-3 hover:shadow-md transition-shadow duration-300"
+                    >
+                      <div className="h-10 w-10 rounded-lg bg-primary/5 text-primary flex items-center justify-center shrink-0">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-base text-black">{s.title}</h3>
+                        <p className="mt-1.5 text-sm text-gray-600 leading-relaxed">
+                          {s.text}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-lg">
               {[
                 { v: "20", l: "év tapasztalat" },
@@ -236,6 +286,31 @@ function Home() {
                   <div className="text-xs sm:text-sm text-black">{s.l}</div>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Service Cards (Desktop view: 2x2 grid in the right column) */}
+          <div className="hidden lg:block lg:col-span-5 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {services.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <div
+                    key={s.title}
+                    className="bg-white border border-gray-100 shadow-sm rounded-xl p-5 flex flex-col gap-3 hover:shadow-md transition-shadow duration-300"
+                  >
+                    <div className="h-10 w-10 rounded-lg bg-primary/5 text-primary flex items-center justify-center shrink-0">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-base text-black">{s.title}</h3>
+                      <p className="mt-1.5 text-sm text-gray-600 leading-relaxed">
+                        {s.text}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
