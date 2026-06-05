@@ -250,8 +250,21 @@ function Home() {
       </header>
 
       {/* HERO */}
-      <section id="kezdolap" className="relative min-h-[100vh] flex items-center pt-24 pb-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section id="kezdolap" className="relative min-h-[100vh] flex items-center pt-24 pb-16 bg-white overflow-hidden">
+        {/* Háttér dekorációs csíkok */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+          {/* Első vöröses csík */}
+          <div 
+            className="absolute top-[-30%] left-[-10%] w-[160%] h-[150px] -rotate-45 transform origin-top-left" 
+            style={{ backgroundColor: "rgba(184, 58, 48, 0.04)" }}
+          />
+          {/* Második vöröses csík (dupla párhuzamos csík) */}
+          <div 
+            className="absolute top-[-30%] left-[-10%] w-[160%] h-[75px] -rotate-45 transform origin-top-left translate-y-[220px]" 
+            style={{ backgroundColor: "rgba(184, 58, 48, 0.03)" }}
+          />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 flex flex-col text-black">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-medium text-primary mb-6 self-start">
               <span className="h-2 w-2 rounded-full bg-cta" />
