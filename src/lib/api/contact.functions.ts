@@ -30,9 +30,10 @@ export const submitContactForm = createServerFn({ method: "POST" })
   )
   .handler(async ({ data }) => {
     const apiKey = process.env.BREVO_API_KEY;
+    const companyEmail = process.env.COMPANY_EMAIL;
 
-    if (!apiKey) {
-      console.error("Hiba: BREVO_API_KEY környezeti változó hiányzik!");
+    if (!apiKey || !companyEmail) {
+      console.error("Hiba: BREVO_API_KEY vagy COMPANY_EMAIL környezeti változó hiányzik!");
       return {
         success: false,
         message: "A szerver konfigurációja hiányos. E-mail küldése sikertelen.",
@@ -40,18 +41,22 @@ export const submitContactForm = createServerFn({ method: "POST" })
     }
 
     try {
-      // 1. Éles e-mail a tulajdonosnak (ronaldo02149@gmail.com)
+      // 1. Éles e-mail a tulajdonosnak (companyEmail)
       const adminEmailPayload = {
         sender: {
           name: "Horváth Tüzép Kft.",
-          email: "ronaldo02149@gmail.com",
+          email: companyEmail,
         },
         to: [
           {
-            email: "ronaldo02149@gmail.com",
-            name: "Horváth Tüzép",
+            email: companyEmail,
+            name: "Horváth Tüzép Kft.",
           },
         ],
+        replyTo: {
+          email: data.email,
+          name: data.name,
+        },
         subject: `Új árajánlatkérés érkezett – ${data.name}`,
         htmlContent: `
           <!DOCTYPE html>
@@ -87,7 +92,7 @@ export const submitContactForm = createServerFn({ method: "POST" })
       const autoResponderPayload = {
         sender: {
           name: "Horváth Tüzép Kft.",
-          email: "ronaldo02149@gmail.com",
+          email: companyEmail,
         },
         to: [
           {
@@ -95,6 +100,10 @@ export const submitContactForm = createServerFn({ method: "POST" })
             name: data.name,
           },
         ],
+        replyTo: {
+          email: companyEmail,
+          name: "Horváth Tüzép Kft.",
+        },
         subject: "Sikeres ajánlatkérés – Horváth Tüzép Kft.",
         htmlContent: `
           <!DOCTYPE html>
