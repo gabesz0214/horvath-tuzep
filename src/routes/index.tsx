@@ -190,20 +190,20 @@ function Home() {
       </header>
 
       {/* HERO */}
-      <section id="kezdolap" className="bg-gray-50 pt-28 pb-16 lg:pt-36 lg:pb-24 flex items-center min-h-[100vh]">
+      <section id="kezdolap" className="bg-slate-900 pt-28 pb-16 lg:pt-36 lg:pb-24 flex items-center min-h-[100vh]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
           {/* Bal oszlop */}
-          <div className="text-black">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-medium text-primary mb-6">
+          <div className="text-white">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary border border-primary/20 text-xs font-medium text-white mb-6">
               <span className="h-2 w-2 rounded-full bg-cta" />
               Közel 20 éve az építkezők szolgálatában
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] text-black">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] text-white">
               Minőségi építőanyagok
               <br />
               <span className="text-cta">egyenesen a raktárról</span>
             </h1>
-            <p className="mt-6 text-lg text-black max-w-xl">
+            <p className="mt-6 text-lg text-white/90 max-w-xl">
               Több mint 10.000 termék, szakértő tanácsadás és gyors kiszállítás Vásárosnaményból
               és Kisvárdáról. Levesszük a válláról az anyagbeszerzés terheit.
             </p>
@@ -221,21 +221,21 @@ function Home() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="h-12 px-6 bg-transparent border-primary text-primary hover:bg-primary hover:text-white transition-colors"
+                className="h-12 px-6 bg-transparent border-white text-white hover:bg-white/10 hover:text-white hover:border-white transition-all duration-300"
               >
                 <a href="#kapcsolat">Kapcsolatfelvétel</a>
               </Button>
             </div>
 
-            <div className="mt-12 grid grid-cols-3 gap-6 max-w-lg">
+            <div className="mt-16 grid grid-cols-3 gap-8 max-w-lg">
               {[
                 { v: "20", l: "év tapasztalat" },
                 { v: "10.000+", l: "termék" },
                 { v: "2", l: "telephely" },
               ].map((s) => (
-                <div key={s.l}>
-                  <div className="text-2xl sm:text-3xl font-bold text-primary">{s.v}</div>
-                  <div className="text-xs sm:text-sm text-black">{s.l}</div>
+                <div key={s.l} className="space-y-1">
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">{s.v}</div>
+                  <div className="text-xs sm:text-sm text-white/70">{s.l}</div>
                 </div>
               ))}
             </div>
@@ -246,7 +246,7 @@ function Home() {
             <img
               src={heroBg}
               alt="Horváth Tüzép telephely és cégtábla"
-              className="w-full h-[320px] sm:h-[450px] lg:h-[500px] object-cover rounded-2xl shadow-lg border border-gray-100"
+              className="w-full h-[320px] sm:h-[450px] lg:h-[500px] object-cover lg:[mask-image:linear-gradient(to_right,transparent,black_20%)]"
             />
           </div>
         </div>
