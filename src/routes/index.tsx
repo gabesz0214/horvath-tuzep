@@ -190,17 +190,10 @@ function Home() {
       </header>
 
       {/* HERO */}
-      <section id="kezdolap" className="relative overflow-hidden min-h-[100vh] flex items-center pt-16">
-        <img
-          src={heroBg}
-          alt="Horváth Tüzép telephely és cégtábla"
-          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none z-0"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white/80 lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:via-50% lg:to-transparent z-10" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white to-transparent z-10" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full relative z-20">
-          <div className="max-w-2xl text-black">
+      <section id="kezdolap" className="bg-gray-50 pt-28 pb-16 lg:pt-36 lg:pb-24 flex items-center min-h-[100vh]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+          {/* Bal oszlop */}
+          <div className="text-black">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-medium text-primary mb-6">
               <span className="h-2 w-2 rounded-full bg-cta" />
               Közel 20 éve az építkezők szolgálatában
@@ -246,6 +239,15 @@ function Home() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Jobb oszlop */}
+          <div className="w-full">
+            <img
+              src={heroBg}
+              alt="Horváth Tüzép telephely és cégtábla"
+              className="w-full h-[320px] sm:h-[450px] lg:h-[500px] object-cover rounded-2xl shadow-lg border border-gray-100"
+            />
           </div>
         </div>
       </section>
