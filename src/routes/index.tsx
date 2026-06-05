@@ -250,8 +250,27 @@ function Home() {
       </header>
 
       {/* HERO */}
-      <section id="kezdolap" className="relative min-h-[100vh] flex items-center pt-24 pb-16 bg-white overflow-hidden bg-[linear-gradient(115deg,transparent_65%,rgba(178,34,34,0.04)_65%,rgba(178,34,34,0.04)_68%,transparent_68%,transparent_70%,rgba(178,34,34,0.03)_70%,rgba(178,34,34,0.03)_75%,transparent_75%)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section id="kezdolap" className="relative min-h-[100vh] flex items-center pt-24 pb-16 bg-white overflow-hidden">
+        {/* Háttér dekorációs sávok (bal alulról jobb felülre) */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+          {/* Első sáv: vékonyabb */}
+          <div 
+            className="absolute bottom-[10%] left-[-5%] w-[150%] h-[35px] origin-bottom-left" 
+            style={{ 
+              transform: "rotate(-35deg)",
+              backgroundColor: "rgba(184, 58, 48, 0.15)" 
+            }}
+          />
+          {/* Második sáv: szélesebb */}
+          <div 
+            className="absolute bottom-[10%] left-[-5%] w-[150%] h-[85px] origin-bottom-left" 
+            style={{ 
+              transform: "rotate(-35deg) translateY(-120px)",
+              backgroundColor: "rgba(184, 58, 48, 0.10)" 
+            }}
+          />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 flex flex-col text-black">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-medium text-primary mb-6 self-start">
               <span className="h-2 w-2 rounded-full bg-cta" />
