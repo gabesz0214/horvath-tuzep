@@ -440,7 +440,9 @@ function Home() {
               </div>
               <div className="mt-6 pt-6 border-t border-gray-200">
                 <a
-                  href="mailto:info@horvathtuzep.hu"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=info@horvathtuzep.hu"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 font-semibold text-black hover:text-cta transition-colors"
                 >
                   <Mail className="h-4 w-4 text-primary" /> info@horvathtuzep.hu
@@ -505,7 +507,12 @@ function Home() {
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:info@horvathtuzep.hu" className="hover:text-cta transition-colors">
+                  <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=info@horvathtuzep.hu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-cta transition-colors"
+                  >
                     info@horvathtuzep.hu
                   </a>
                 </li>
