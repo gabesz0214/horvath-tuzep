@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero-warehouse.jpg";
+import heroOfficial from "@/assets/hero-official.jpg";
 import logoImg from "@/assets/logo.png";
 
 export const Route = createFileRoute("/")({
@@ -192,11 +193,11 @@ function Home() {
       <section id="kezdolap" className="relative min-h-[100vh] flex items-center pt-16">
         <div className="absolute inset-0 -z-10">
           <img
-            src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1920&q=80"
-            alt="Horváth Tüzép modern építkezés és minőségi építőanyagok"
+            src={heroOfficial}
+            alt="Horváth Tüzép telephely és cégtábla"
             width={1920}
             height={1080}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center bg-cover bg-center"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white/80 lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:via-55% lg:to-transparent" />
         </div>
