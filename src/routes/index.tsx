@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero-warehouse.jpg";
+import logoImg from "@/assets/logo.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -120,10 +121,8 @@ function Home() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <a href="#kezdolap" className="flex items-center gap-2">
-            <div className="h-9 w-9 rounded-md bg-white border border-black text-black grid place-items-center font-bold">
-              H
-            </div>
+          <a href="#kezdolap" className="flex items-center gap-3">
+            <img src={logoImg} alt="Horváth Tüzép logo" className="h-10 w-auto object-contain" />
             <div className="leading-tight">
               <div className="font-semibold text-black">Horváth Tüzép</div>
               <div className="text-[11px] text-black -mt-0.5">Építőanyag kereskedés</div>
@@ -460,10 +459,8 @@ function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           <div className="grid md:grid-cols-4 gap-10 text-black">
             <div className="md:col-span-2">
-              <div className="flex items-center gap-2">
-                <div className="h-9 w-9 rounded-md bg-white border border-black text-black grid place-items-center font-bold">
-                  H
-                </div>
+              <div className="flex items-center gap-3">
+                <img src={logoImg} alt="Horváth Tüzép logo" className="h-10 w-auto object-contain" />
                 <div className="font-semibold text-black">Horváth Tüzép Kft.</div>
               </div>
               <p className="mt-4 text-sm text-black max-w-md">
