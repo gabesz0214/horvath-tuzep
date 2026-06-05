@@ -193,21 +193,21 @@ function Home() {
             height={1080}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/75 to-primary/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a121c]/95 via-[#0a121c]/80 to-[#0a121c]/45" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
-          <div className="max-w-2xl text-primary-foreground section-fade">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-medium mb-6">
+          <div className="max-w-2xl text-white section-fade">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-white/10 text-xs font-medium text-white mb-6">
               <span className="h-2 w-2 rounded-full bg-cta" />
               Közel 20 éve az építkezők szolgálatában
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] text-white">
               Minőségi építőanyagok
               <br />
               <span className="text-cta">egyenesen a raktárról</span>
             </h1>
-            <p className="mt-6 text-lg text-primary-foreground/85 max-w-xl">
+            <p className="mt-6 text-lg text-white/90 max-w-xl">
               Több mint 10.000 termék, szakértő tanácsadás és gyors kiszállítás Vásárosnaményból
               és Kisvárdáról. Levesszük a válláról az anyagbeszerzés terheit.
             </p>
@@ -239,7 +239,7 @@ function Home() {
               ].map((s) => (
                 <div key={s.l}>
                   <div className="text-2xl sm:text-3xl font-bold text-cta">{s.v}</div>
-                  <div className="text-xs sm:text-sm text-primary-foreground/80">{s.l}</div>
+                  <div className="text-xs sm:text-sm text-white/80">{s.l}</div>
                 </div>
               ))}
             </div>
@@ -373,14 +373,14 @@ function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="kapcsolat" className="py-20 lg:py-28 bg-primary text-primary-foreground">
+      <section id="kapcsolat" className="py-20 lg:py-28 bg-primary text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <div className="text-sm font-semibold text-cta uppercase tracking-wider">Kapcsolat</div>
             <h2 className="mt-2 text-3xl sm:text-4xl font-bold">
               Keressen minket bizalommal
             </h2>
-            <p className="mt-4 text-primary-foreground/80">
+            <p className="mt-4 text-white/80">
               Két telephellyel állunk rendelkezésére. Kérjen árajánlatot vagy látogasson el
               hozzánk személyesen.
             </p>
