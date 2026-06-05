@@ -30,10 +30,9 @@ export const submitContactForm = createServerFn({ method: "POST" })
   )
   .handler(async ({ data }) => {
     const apiKey = process.env.BREVO_API_KEY;
-    const companyEmail = process.env.COMPANY_EMAIL;
 
-    if (!apiKey || !companyEmail) {
-      console.error("Hiba: BREVO_API_KEY vagy COMPANY_EMAIL környezeti változó hiányzik!");
+    if (!apiKey) {
+      console.error("Hiba: BREVO_API_KEY környezeti változó hiányzik!");
       return {
         success: false,
         message: "A szerver konfigurációja hiányos. E-mail küldése sikertelen.",
@@ -41,15 +40,15 @@ export const submitContactForm = createServerFn({ method: "POST" })
     }
 
     try {
-      // 1. Éles e-mail a tulajdonosnak (companyEmail)
+      // 1. Éles e-mail a tulajdonosnak (cockisacc2@gmail.com)
       const adminEmailPayload = {
         sender: {
           name: "Horváth Tüzép Kft.",
-          email: companyEmail,
+          email: "cockisacc2@gmail.com",
         },
         to: [
           {
-            email: companyEmail,
+            email: "cockisacc2@gmail.com",
             name: "Horváth Tüzép Kft.",
           },
         ],
@@ -92,7 +91,7 @@ export const submitContactForm = createServerFn({ method: "POST" })
       const autoResponderPayload = {
         sender: {
           name: "Horváth Tüzép Kft.",
-          email: companyEmail,
+          email: "cockisacc2@gmail.com",
         },
         to: [
           {
@@ -101,7 +100,7 @@ export const submitContactForm = createServerFn({ method: "POST" })
           },
         ],
         replyTo: {
-          email: companyEmail,
+          email: "cockisacc2@gmail.com",
           name: "Horváth Tüzép Kft.",
         },
         subject: "Sikeres ajánlatkérés – Horváth Tüzép Kft.",
