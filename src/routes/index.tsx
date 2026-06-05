@@ -201,6 +201,7 @@ function Home() {
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white/80 lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:via-55% lg:to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white to-transparent" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
