@@ -11,7 +11,6 @@ import {
   X,
   Search,
   ArrowLeft,
-  ExternalLink,
 } from "lucide-react";
 import logoImg from "@/assets/logo.png";
 
@@ -250,12 +249,9 @@ function Partnereink() {
                     </p>
                   </div>
                   
-                  <div className="mt-6 pt-4 border-t border-border/40 flex items-center justify-between text-xs text-gray-400">
+                  <div className="mt-6 pt-4 border-t border-border/40 flex items-center justify-start text-xs text-gray-400">
                     <span className="font-semibold uppercase tracking-wider text-[10px] text-cta bg-cta/5 px-2.5 py-1 rounded-md">
                       {partnerCategories.find(c => c.id === partner.category)?.name}
-                    </span>
-                    <span className="flex items-center gap-1 group-hover:text-primary transition-colors cursor-pointer font-medium">
-                      Weboldal <ExternalLink className="h-3 w-3" />
                     </span>
                   </div>
                 </Card>
