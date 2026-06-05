@@ -140,7 +140,7 @@ function Home() {
                 key={n.label}
                 to={n.to}
                 hash={n.hash}
-                className="text-sm font-medium text-primary hover:text-cta transition-colors [&.active]:text-cta"
+                className="text-sm font-medium text-primary hover:text-cta transition-colors"
               >
                 {n.label}
               </Link>
@@ -174,7 +174,7 @@ function Home() {
                   to={n.to}
                   hash={n.hash}
                   onClick={() => setOpen(false)}
-                  className="text-sm font-medium py-2 text-primary hover:text-cta [&.active]:text-cta"
+                  className="text-sm font-medium py-2 text-primary hover:text-cta"
                 >
                   {n.label}
                 </Link>
@@ -483,7 +483,7 @@ function Home() {
                     <Link
                       to={n.to}
                       hash={n.hash}
-                      className="text-primary hover:text-cta transition-colors font-medium [&.active]:text-cta"
+                      className="text-primary hover:text-cta transition-colors font-medium"
                     >
                       {n.label}
                     </Link>
