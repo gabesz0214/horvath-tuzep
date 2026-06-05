@@ -590,11 +590,18 @@ function Home() {
             </div>
           </div>
 
-          <div className="mt-12 pt-6 border-t border-border flex flex-wrap items-center justify-between gap-3 text-xs text-black/70">
-            <div>© {new Date().getFullYear()} Horváth Tüzép Kft. Minden jog fenntartva.</div>
-            <div className="flex gap-4 text-black/70">
-              <span>Adatvédelmi nyilatkozat</span>
-              <span>ÁSZF</span>
+          <div className="mt-12 pt-6 border-t border-border flex flex-col gap-4 text-xs text-black/70">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>© {new Date().getFullYear()} Horváth Tüzép Kft. Minden jog fenntartva.</div>
+              <div className="flex gap-4">
+                <Link to="/adatkezelesi-tajekoztato" className="hover:text-cta transition-colors underline">
+                  Adatkezelési Tájékoztató
+                </Link>
+                <span>ÁSZF</span>
+              </div>
+            </div>
+            <div className="border-t border-gray-200/50 pt-4 text-[11px] text-gray-500 space-y-1">
+              <p><strong>Cégnév:</strong> HORVÁTH TÜZÉP Kft. | <strong>Székhely:</strong> 4800 Vásárosnamény, Ilki út 2. | <strong>Adószám:</strong> 11985799-2-15 | <strong>Cégjegyzékszám:</strong> 15-09-067207</p>
             </div>
           </div>
         </div>
