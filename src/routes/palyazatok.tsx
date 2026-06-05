@@ -380,12 +380,12 @@ function Palyazatok() {
                 </li>
                 <li>
                   <a
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=gabor.h077@gmail.com"
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=info@horvathtuzep.hu"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-cta transition-colors"
                   >
-                    gabor.h077@gmail.com
+                    info@horvathtuzep.hu
                   </a>
                 </li>
               </ul>
