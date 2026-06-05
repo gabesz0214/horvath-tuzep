@@ -40,15 +40,15 @@ export const submitContactForm = createServerFn({ method: "POST" })
     }
 
     try {
-      // 1. Éles e-mail a tulajdonosnak (gabor.h077@gmail.com)
+      // 1. Éles e-mail a tulajdonosnak (ronaldo02149@gmail.com)
       const adminEmailPayload = {
         sender: {
-          name: "Horváth Tüzép Kft. Weboldal",
-          email: "info@horvathtuzep.hu",
+          name: "Horváth Tüzép Kft.",
+          email: "ronaldo02149@gmail.com",
         },
         to: [
           {
-            email: "gabor.h077@gmail.com",
+            email: "ronaldo02149@gmail.com",
             name: "Horváth Tüzép",
           },
         ],
@@ -87,7 +87,7 @@ export const submitContactForm = createServerFn({ method: "POST" })
       const autoResponderPayload = {
         sender: {
           name: "Horváth Tüzép Kft.",
-          email: "info@horvathtuzep.hu",
+          email: "ronaldo02149@gmail.com",
         },
         to: [
           {
