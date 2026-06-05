@@ -261,12 +261,10 @@ function AdatkezelesiTajekoztato() {
                 </li>
                 <li>
                   <a
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=info@horvathtuzep.hu"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="mailto:gabor.h077@gmail.com"
                     className="hover:text-cta transition-colors"
                   >
-                    info@horvathtuzep.hu
+                    gabor.h077@gmail.com
                   </a>
                 </li>
               </ul>
