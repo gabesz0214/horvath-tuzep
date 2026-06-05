@@ -26,6 +26,10 @@ import {
 import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero-warehouse.jpg";
 import logoImg from "@/assets/logo.png";
+import { toast } from "sonner";
+import { submitContactForm } from "../lib/api/contact.functions";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -133,6 +137,38 @@ const locations = [
 function Home() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormStatus("loading");
+    try {
+      const res = await submitContactForm({ data: formData });
+      if (res.success) {
+        setFormStatus("success");
+        setFormData({ name: "", email: "", phone: "", message: "" });
+        toast.success("Ajánlatkérés sikeresen elküldve! Ellenőrizze e-mail fiókját a visszaigazolásért.");
+      } else {
+        setFormStatus("error");
+        toast.error("Hiba történt az adatok küldése során.");
+      }
+    } catch (err) {
+      setFormStatus("error");
+      toast.error("Hiba történt a kapcsolatfelvétel során. Kérjük, próbálja meg később!");
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -447,74 +483,151 @@ function Home() {
             <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-black">
               Keressen minket bizalommal
             </h2>
-            <p className="mt-4 text-black">
-              Két telephellyel állunk rendelkezésére. Kérjen árajánlatot vagy látogasson el
-              hozzánk személyesen.
+            <p className="mt-4 text-black mb-12">
+              Kérjen árajánlatot egyszerűen az alábbi űrlap segítségével, vagy keresse fel telephelyeinket személyesen.
             </p>
           </div>
 
-          <div className="mt-12 grid lg:grid-cols-3 gap-6">
-            {locations.map((loc) => (
-              <Card
-                key={loc.city}
-                className="p-6 bg-white text-black border-border shadow-sm hover:border-primary/20 transition-all duration-300"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-lg bg-primary text-white grid place-items-center">
-                    <MapPin className="h-5 w-5" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            {/* Left side: Inquiry Form */}
+            <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl border border-gray-100 shadow-sm">
+              <h3 className="text-xl font-bold text-black mb-6">Online árajánlatkérés</h3>
+              <form onSubmit={handleFormSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-gray-700" htmlFor="name">Teljes név *</label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      placeholder="Minta János"
+                      value={formData.name}
+                      onChange={handleFormChange}
+                      disabled={formStatus === "loading"}
+                      className="bg-white text-black border-gray-200"
+                    />
                   </div>
-                  <h3 className="text-xl font-semibold text-black">{loc.city}</h3>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-gray-700" htmlFor="phone">Telefonszám *</label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      required
+                      placeholder="+36 30 123 4567"
+                      value={formData.phone}
+                      onChange={handleFormChange}
+                      disabled={formStatus === "loading"}
+                      className="bg-white text-black border-gray-200"
+                    />
+                  </div>
                 </div>
-                <div className="mt-5 space-y-3 text-sm text-black">
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-gray-700" htmlFor="email">E-mail cím *</label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="minta.janos@example.hu"
+                    value={formData.email}
+                    onChange={handleFormChange}
+                    disabled={formStatus === "loading"}
+                    className="bg-white text-black border-gray-200"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-gray-700" htmlFor="message">Szükséges anyagok, üzenet *</label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={5}
+                    placeholder="Kérjük, sorolja fel a szükséges építőanyagokat (pl. Porotherm 30 tégla, gerendák, cement mennyiséggel) és írja le kéréseit..."
+                    value={formData.message}
+                    onChange={handleFormChange}
+                    disabled={formStatus === "loading"}
+                    className="bg-white text-black border-gray-200"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={formStatus === "loading"}
+                  className="w-full bg-cta text-white hover:bg-cta/90 h-12 shadow-sm font-semibold transition-colors cursor-pointer"
+                >
+                  {formStatus === "loading" ? "Küldés folyamatban..." : "Árajánlatkérés elküldése"}
+                </Button>
+              </form>
+            </div>
+
+            {/* Right side: Contact Details Cards */}
+            <div className="lg:col-span-5 flex flex-col gap-6">
+              {locations.map((loc) => (
+                <Card
+                  key={loc.city}
+                  className="p-6 bg-white text-black border-border shadow-sm hover:border-primary/20 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary text-white grid place-items-center">
+                      <MapPin className="h-5 w-5" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-black">{loc.city}</h3>
+                  </div>
+                  <div className="mt-5 space-y-3 text-sm text-black">
+                    <a
+                      href={loc.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-start gap-3 hover:text-cta transition-colors text-black group/addr"
+                    >
+                      <MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0 group-hover/addr:text-cta transition-colors" />
+                      <span className="hover:underline">{loc.address}</span>
+                    </a>
+                    <a href={`tel:${loc.phone.replace(/\s/g, "")}`} className="flex items-start gap-3 hover:text-cta transition-colors text-black">
+                      <Phone className="h-4 w-4 mt-0.5 text-primary shrink-0" />
+                      <span className="font-semibold text-lg text-black">{loc.phone}</span>
+                    </a>
+                    <div className="flex items-start gap-3 text-black">
+                      <span className="text-xs mt-1 shrink-0 text-primary">FAX</span>
+                      <span>{loc.fax}</span>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+
+              <Card className="p-6 bg-white text-black border-border shadow-sm hover:border-primary/20 transition-all duration-300">
+                <div className="h-10 w-10 rounded-lg bg-primary/10 text-primary grid place-items-center">
+                  <Clock className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 text-xl font-semibold text-black">Nyitvatartás</h3>
+                <div className="mt-5 space-y-2 text-sm text-black">
+                  {[
+                    ["Hétfő – Péntek", "7:00 – 16:00"],
+                    ["Szombat", "7:00 – 12:00"],
+                    ["Vasárnap", "Zárva"],
+                  ].map(([d, h]) => (
+                    <div key={d} className="flex justify-between border-b border-gray-200 pb-2 last:border-0 text-black">
+                      <span>{d}</span>
+                      <span className="font-semibold">{h}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-6 pt-6 border-t border-gray-200">
                   <a
-                    href={loc.mapUrl}
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=info@horvathtuzep.hu"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-start gap-3 hover:text-cta transition-colors text-black group/addr"
+                    className="flex items-center gap-2 font-semibold text-black hover:text-cta transition-colors"
                   >
-                    <MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0 group-hover/addr:text-cta transition-colors" />
-                    <span className="hover:underline">{loc.address}</span>
+                    <Mail className="h-4 w-4 text-primary" /> info@horvathtuzep.hu
                   </a>
-                  <a href={`tel:${loc.phone.replace(/\s/g, "")}`} className="flex items-start gap-3 hover:text-cta transition-colors text-black">
-                    <Phone className="h-4 w-4 mt-0.5 text-primary shrink-0" />
-                    <span className="font-semibold text-lg text-black">{loc.phone}</span>
-                  </a>
-                  <div className="flex items-start gap-3 text-black">
-                    <span className="text-xs mt-1 shrink-0 text-primary">FAX</span>
-                    <span>{loc.fax}</span>
-                  </div>
                 </div>
               </Card>
-            ))}
-
-            <Card className="p-6 bg-white text-black border-border shadow-sm hover:border-primary/20 transition-all duration-300">
-              <div className="h-10 w-10 rounded-lg bg-primary/10 text-primary grid place-items-center">
-                <Clock className="h-5 w-5" />
-              </div>
-              <h3 className="mt-4 text-xl font-semibold text-black">Nyitvatartás</h3>
-              <div className="mt-5 space-y-2 text-sm text-black">
-                {[
-                  ["Hétfő – Péntek", "7:00 – 16:00"],
-                  ["Szombat", "7:00 – 12:00"],
-                  ["Vasárnap", "Zárva"],
-                ].map(([d, h]) => (
-                  <div key={d} className="flex justify-between border-b border-gray-200 pb-2 last:border-0 text-black">
-                    <span>{d}</span>
-                    <span className="font-semibold">{h}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <a
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=info@horvathtuzep.hu"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 font-semibold text-black hover:text-cta transition-colors"
-                >
-                  <Mail className="h-4 w-4 text-primary" /> info@horvathtuzep.hu
-                </a>
-              </div>
-            </Card>
+            </div>
           </div>
         </div>
       </section>

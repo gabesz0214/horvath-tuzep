@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PartnereinkRouteImport } from './routes/partnereink'
 import { Route as PalyazatokRouteImport } from './routes/palyazatok'
+import { Route as AdatkezelesiTajekoztatoRouteImport } from './routes/adatkezelesi-tajekoztato'
 import { Route as IndexRouteImport } from './routes/index'
 
 const PartnereinkRoute = PartnereinkRouteImport.update({
@@ -23,6 +24,11 @@ const PalyazatokRoute = PalyazatokRouteImport.update({
   path: '/palyazatok',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdatkezelesiTajekoztatoRoute = AdatkezelesiTajekoztatoRouteImport.update({
+  id: '/adatkezelesi-tajekoztato',
+  path: '/adatkezelesi-tajekoztato',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,30 +37,39 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/adatkezelesi-tajekoztato': typeof AdatkezelesiTajekoztatoRoute
   '/palyazatok': typeof PalyazatokRoute
   '/partnereink': typeof PartnereinkRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/adatkezelesi-tajekoztato': typeof AdatkezelesiTajekoztatoRoute
   '/palyazatok': typeof PalyazatokRoute
   '/partnereink': typeof PartnereinkRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/adatkezelesi-tajekoztato': typeof AdatkezelesiTajekoztatoRoute
   '/palyazatok': typeof PalyazatokRoute
   '/partnereink': typeof PartnereinkRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/palyazatok' | '/partnereink'
+  fullPaths: '/' | '/adatkezelesi-tajekoztato' | '/palyazatok' | '/partnereink'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/palyazatok' | '/partnereink'
-  id: '__root__' | '/' | '/palyazatok' | '/partnereink'
+  to: '/' | '/adatkezelesi-tajekoztato' | '/palyazatok' | '/partnereink'
+  id:
+    | '__root__'
+    | '/'
+    | '/adatkezelesi-tajekoztato'
+    | '/palyazatok'
+    | '/partnereink'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdatkezelesiTajekoztatoRoute: typeof AdatkezelesiTajekoztatoRoute
   PalyazatokRoute: typeof PalyazatokRoute
   PartnereinkRoute: typeof PartnereinkRoute
 }
@@ -75,6 +90,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PalyazatokRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/adatkezelesi-tajekoztato': {
+      id: '/adatkezelesi-tajekoztato'
+      path: '/adatkezelesi-tajekoztato'
+      fullPath: '/adatkezelesi-tajekoztato'
+      preLoaderRoute: typeof AdatkezelesiTajekoztatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +109,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdatkezelesiTajekoztatoRoute: AdatkezelesiTajekoztatoRoute,
   PalyazatokRoute: PalyazatokRoute,
   PartnereinkRoute: PartnereinkRoute,
 }
