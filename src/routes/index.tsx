@@ -93,12 +93,12 @@ const services = [
   {
     icon: Layers,
     title: "Hatalmas raktárkészlet",
-    text: "Több mint 10.000 termékünk jelentős része azonnal, raktárról elérhető, így az építkezés egy percet sem csúszik.",
+    text: "Széles áruválasztékunk biztosítja, hogy az alapozástól a tetőfedésig mindent egy helyen megtalálj, így az építkezés zökkenőmentesen haladhat.",
   },
   {
     icon: Users,
     title: "Szakértő tanácsadás",
-    text: "Közel 20 év szakmai tapasztalattal segítünk kiválasztani a legmegfelelőbb és leggazdaságosabb építőanyagokat.",
+    text: "Mérnökök és kivitelezők által is elismert szakmai háttérrel segítünk kiválasztani a legmegfelelőbb és leggazdaságosabb építőanyagokat a tervrajzodhoz.",
   },
 ];
 
@@ -391,14 +391,12 @@ function Home() {
           <div>
             <div className="text-sm font-bold text-cta uppercase tracking-wider">Rólunk</div>
             <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-black">
-              Csaknem 20 éve építünk együtt Önnel
+              Partner az otthonteremtésben
             </h2>
             <div className="mt-6 space-y-4 text-black leading-relaxed">
               <p>
                 Üdvözli Önt a <span className="text-cta font-bold">Horváth Tüzép Kft.</span>{" "}
-                valamennyi dolgozója. Cégünk munkatársai immár csaknem 20 éve azon dolgoznak,
-                hogy Ön élete egyik legnagyobb beruházását — álmai otthonát — minél könnyebben,
-                gazdaságosabban és korszerűbben valósíthassa meg.
+                valamennyi dolgozója. Családi vállalkozásunk célja, hogy a régió építkezőit és kivitelezőit a legmagasabb szinten szolgálja ki. Nem csupán anyagot értékesítünk, hanem partnerként kísérjük végig ügyfeleinket az otthonteremtés útján.
               </p>
               <p>
                 Levesszük a válláról az anyagbeszerzés terheit, ellátjuk megfelelő szaktanácsokkal,
@@ -408,9 +406,9 @@ function Home() {
             </div>
             <div className="mt-8 grid grid-cols-3 gap-6">
               {[
-                { v: "20", l: "év tapasztalat" },
-                { v: "10.000+", l: "termék raktáron" },
-                { v: "2", l: "telephely" },
+                { v: "100%", l: "vevőorientált kiszolgálás" },
+                { v: "Díjmentes", l: "anyagszükséglet számítás" },
+                { v: "Saját", l: "darus teherautó flotta" },
               ].map((s) => (
                 <div key={s.l} className="border-l-2 border-cta pl-4">
                   <div className="text-2xl font-bold text-primary">{s.v}</div>
@@ -432,9 +430,9 @@ function Home() {
               />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-white border border-border text-black p-6 rounded-xl shadow-xl max-w-[240px] hidden sm:block">
-              <div className="text-3xl font-bold text-primary">10.000+</div>
+              <div className="text-3xl font-bold text-primary">Teljes körű</div>
               <div className="text-sm mt-1 text-black">
-                termék közül választhat egy helyen
+                alapanyagtámogatás az alapozástól a tetőig
               </div>
             </div>
           </div>
