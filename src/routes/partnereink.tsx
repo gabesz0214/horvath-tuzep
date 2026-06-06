@@ -173,7 +173,7 @@ function Partnereink() {
 
       {/* MAIN CONTAINER */}
       <main className="flex-grow pt-28 pb-20 relative overflow-hidden bg-white">
-        <div className="absolute inset-0 w-full h-full opacity-30 pointer-events-none z-0 bg-[linear-gradient(115deg,transparent_20%,#fee2e2_20%,#fee2e2_25%,transparent_25%,transparent_28%,#fee2e2_28%,#fee2e2_38%,transparent_38%)]" />
+        <div className="absolute inset-0 w-full h-full opacity-30 pointer-events-none z-0 bg-[linear-gradient(115deg,transparent_32%,#fee2e2_32%,#fee2e2_36%,transparent_36%,transparent_39%,#fee2e2_39%,#fee2e2_47%,transparent_47%)]" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Back Button */}
