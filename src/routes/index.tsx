@@ -251,25 +251,7 @@ function Home() {
 
       {/* HERO */}
       <section id="kezdolap" className="relative min-h-[100vh] flex items-center pt-24 pb-16 bg-white overflow-hidden">
-        {/* Jobb oldali háttér dekorációs sávok (bal oldalt tisztán hagyva) */}
-        <div className="absolute top-0 right-0 w-[50%] h-full z-0 pointer-events-none overflow-hidden select-none hidden lg:block">
-          {/* Első sáv: vékonyabb */}
-          <div 
-            className="absolute top-[-20%] left-[-20%] w-[160%] h-[35px] origin-top-left" 
-            style={{ 
-              transform: "rotate(-35deg)",
-              backgroundColor: "rgba(184, 58, 48, 0.04)" 
-            }}
-          />
-          {/* Második sáv: vastagabb */}
-          <div 
-            className="absolute top-[-20%] left-[-20%] w-[160%] h-[85px] origin-top-left" 
-            style={{ 
-              transform: "rotate(-35deg) translateY(120px)",
-              backgroundColor: "rgba(184, 58, 48, 0.03)" 
-            }}
-          />
-        </div>
+        <div className="absolute right-0 top-0 w-1/2 h-full opacity-30 pointer-events-none z-0 bg-[linear-gradient(115deg,transparent_40%,#fee2e2_40%,#fee2e2_45%,transparent_45%,transparent_48%,#fee2e2_48%,#fee2e2_58%,transparent_58%)]" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 flex flex-col text-black">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-medium text-primary mb-6 self-start">
