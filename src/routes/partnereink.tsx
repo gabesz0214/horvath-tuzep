@@ -172,8 +172,9 @@ function Partnereink() {
       </header>
 
       {/* MAIN CONTAINER */}
-      <main className="flex-grow pt-28 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="flex-grow pt-28 pb-20 relative overflow-hidden bg-white">
+        <div className="absolute right-0 top-0 w-1/2 h-full opacity-30 pointer-events-none z-0 bg-[linear-gradient(115deg,transparent_40%,#fee2e2_40%,#fee2e2_45%,transparent_45%,transparent_48%,#fee2e2_48%,#fee2e2_58%,transparent_58%)]" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Back Button */}
           <div className="mb-6">
