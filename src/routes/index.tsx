@@ -22,6 +22,10 @@ import {
   X,
   Calculator,
   Users,
+  Coins,
+  FileText,
+  Calendar,
+  CheckCircle,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero-warehouse.jpg";
@@ -30,6 +34,8 @@ import { toast } from "sonner";
 import { submitContactForm } from "../lib/api/contact.functions";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -56,7 +62,6 @@ const nav = [
   { to: "/", hash: "termekek", label: "Termékek" },
   { to: "/", hash: "rolunk", label: "Rólunk" },
   { to: "/partnereink", label: "Partnereink" },
-  { to: "/palyazatok", label: "Pályázatok" },
   { to: "/", hash: "kapcsolat", label: "Kapcsolat" },
 ];
 
@@ -83,28 +88,163 @@ const values = [
   },
 ];
 
-const services = [
+// Stylized vector government coat of arms SVG representation
+const HU_CoatOfArms_SVG = () => (
+  <svg viewBox="0 0 100 130" className="h-10 w-auto object-contain shrink-0" fill="currentColor">
+    {/* Crown */}
+    <path d="M50,15 L35,28 L65,28 Z" fill="#D4AF37" />
+    <circle cx="50" cy="11" r="3" fill="#D4AF37" />
+    <line x1="50" y1="11" x2="50" y2="15" stroke="#D4AF37" strokeWidth="2" />
+    {/* Shield */}
+    <path d="M30,30 L70,30 L70,90 C70,110 50,120 50,120 C50,120 30,110 30,90 Z" fill="#D4AF37" stroke="#ffffff" strokeWidth="1" />
+    {/* Inner Shield Split */}
+    <path d="M32,32 L50,32 L50,115 C50,115 32,105 32,88 Z" fill="#C1272D" />
+    <path d="M50,32 L68,32 L68,88 C68,105 50,115 50,115 Z" fill="#C1272D" />
+    {/* Left stripes (Arpad stripes) */}
+    <path d="M32,45 L50,45 L50,53 L32,53 Z" fill="#ffffff" />
+    <path d="M32,65 L50,65 L50,73 L32,73 Z" fill="#ffffff" />
+    <path d="M32,85 L50,85 L50,93 L32,93 Z" fill="#ffffff" />
+    {/* Right hills (Double cross on three green hills) */}
+    <path d="M50,80 C55,75 63,75 68,80 L68,88 C68,88 50,92 50,92 Z" fill="#007A33" />
+    {/* Double Cross */}
+    <rect x="58" y="48" width="4" height="32" fill="#ffffff" />
+    <rect x="53" y="55" width="14" height="4" fill="#ffffff" />
+    <rect x="55" y="63" width="10" height="4" fill="#ffffff" />
+  </svg>
+);
+
+// Stylized vector EU Flag SVG representation
+const EU_Flag_SVG = () => (
+  <svg viewBox="0 0 120 80" className="h-9 w-auto object-contain border border-gray-200/50 shrink-0">
+    <rect width="120" height="80" fill="#003399" />
+    {/* Stars in a circle */}
+    <g fill="#FFCC00" transform="translate(60, 40)">
+      {[...Array(12)].map((_, i) => {
+        const angle = (i * 30 * Math.PI) / 180;
+        const x = Math.sin(angle) * 22;
+        const y = Math.cos(angle) * 22;
+        return (
+          <polygon
+            key={i}
+            points="0,-4 1,-1 4,-1 2,1 3,4 0,2 -3,4 -2,1 -4,-1 -1,-1"
+            transform={`translate(${x}, ${y})`}
+          />
+        );
+      })}
+    </g>
+  </svg>
+);
+
+// Stylized vector Széchenyi Terv Plusz logo
+const SzechenyiPlusz_Logo_SVG = () => (
+  <svg viewBox="0 0 170 55" className="h-11 w-auto object-contain shrink-0" fill="currentColor">
+    <circle cx="20" cy="27" r="16" fill="#0c2577" />
+    <path d="M13 27 C13 22, 27 22, 27 27" stroke="#FFCC00" strokeWidth="2.5" fill="none" />
+    <path d="M16 30 C16 26, 24 26, 24 30" stroke="#ffffff" strokeWidth="2" fill="none" />
+    <text x="45" y="24" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="10.5" fill="#0c2577" letterSpacing="0.5">SZÉCHENYI</text>
+    <text x="45" y="34" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="10.5" fill="#0c2577" letterSpacing="0.5">TERV </text>
+    <text x="82" y="34" fontFamily="Inter, system-ui, sans-serif" fontWeight="800" fontSize="10.5" fill="#b83a30" letterSpacing="0.5">PLUSZ</text>
+    <text x="45" y="44" fontFamily="Inter, system-ui, sans-serif" fontWeight="400" fontSize="6.5" fill="#0c2577" letterSpacing="0.5">MAGYARORSZÁG KORMÁNYA</text>
+  </svg>
+);
+
+const grantsList = [
   {
-    icon: Truck,
-    title: "Darus kiszállítás",
-    text: "Saját gépparkunkkal és darus teherautóinkkal a legnehezebb alapanyagokat is pontosan a munkaterületre szállítjuk.",
+    id: "palyazat1",
+    title: "Árukészlet Finanszírozás",
+    type: "Forgóeszköz finanszírozási hitel",
+    amount: "50 000 000 Ft",
+    identifier: "Készletfinanszírozási Hitelprogram",
+    desc: "A Horváth Tüzép Építőipari- és Kereskedelmi Kft. a visszatérítendő forgóeszköz-hitelt árukészletének bővítésére és finanszírozására fordítja a folyamatos és zavartalan vevőkiszolgálás fenntartásához.",
+    beneficiary: "HORVÁTH TÜZÉP Építőipari- és Kereskedelmi Kft.",
+    completion: "A hitelszerződés feltételei szerint",
+    fund: "Európai Regionális Fejlesztési Alap",
   },
   {
-    icon: Calculator,
-    title: "Anyagszükséglet számítás",
-    text: "Hozd el vagy küldd el nekünk a tervrajzot, és szakértő csapatunk pontosan kiszámolja a szükséges anyagmennyiséget.",
+    id: "palyazat2",
+    title: "Forgóeszköz Finanszírozás I.",
+    type: "Forgóeszköz finanszírozási hitel",
+    amount: "25 000 000 Ft",
+    identifier: "H-EKTG2/104076/2022/302148/001",
+    desc: "A Horváth Tüzép Kft. a 25 millió Ft visszatérítendő hitelt készletfinanszírozásra, építőanyag-árukészlet vásárlására és működési költségek fedezésére fordítja.",
+    beneficiary: "Horváth Tüzép Kft.",
+    completion: "A hitelprogram feltételei szerint",
+    fund: "NextGenerationEU / Európai Újjáépítési Alap",
   },
   {
-    icon: Layers,
-    title: "Hatalmas raktárkészlet",
-    text: "Széles áruválasztékunk biztosítja, hogy az alapozástól a tetőfedésig mindent egy helyen megtalálj, így az építkezés zökkenőmentesen haladhat.",
-  },
-  {
-    icon: Users,
-    title: "Szakértő tanácsadás",
-    text: "Mérnökök és kivitelezők által is elismert szakmai háttérrel segítünk kiválasztani a legmegfelelőbb és leggazdaságosabb építőanyagokat a tervrajzodhoz.",
+    id: "palyazat3",
+    title: "Forgóeszköz Finanszírozás II.",
+    type: "Forgóeszköz finanszírozási hitel",
+    amount: "148 000 000 Ft",
+    identifier: "H-EKTG2/105968/2022/302148/001",
+    desc: "A Horváth Tüzép Kft. a 148 millió Ft visszatérítendő hitelt építőanyag-készletének nagymértékű bővítésére és folyamatos forgóeszköz-finanszírozásra használja fel.",
+    beneficiary: "Horváth Tüzép Kft.",
+    completion: "A Hitelprogram feltételei szerint",
+    fund: "NextGenerationEU / Európai Regionális Fejlesztési Alap",
   },
 ];
+
+interface SzechenyiBillboardProps {
+  onClick: () => void;
+}
+
+function SzechenyiBillboard({ onClick }: SzechenyiBillboardProps) {
+  return (
+    <button
+      onClick={onClick}
+      className="w-full text-left bg-white border border-gray-200/80 hover:border-cta/40 hover:shadow-xl hover:shadow-cta/5 rounded-2xl p-6 sm:p-8 flex flex-col gap-6 transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-primary/20 relative overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-tr from-primary/[0.01] via-transparent to-cta/[0.01] pointer-events-none" />
+      
+      {/* Logos Row */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-gray-100 pb-5 w-full">
+        <div className="flex items-center gap-2">
+          <HU_CoatOfArms_SVG />
+          <div className="text-[9px] font-bold text-gray-700 leading-tight uppercase">
+            Magyarország<br />Kormánya
+          </div>
+        </div>
+        
+        <div className="hidden sm:block h-8 w-px bg-gray-200" />
+        
+        <SzechenyiPlusz_Logo_SVG />
+        
+        <div className="hidden sm:block h-8 w-px bg-gray-200" />
+        
+        <div className="flex items-center gap-2 text-right">
+          <div className="text-[9px] font-bold text-gray-700 leading-tight uppercase">
+            Európai Unió<br />
+            <span className="text-[7.5px] font-normal text-gray-500 lowercase">
+              NextGenerationEU
+            </span>
+          </div>
+          <EU_Flag_SVG />
+        </div>
+      </div>
+
+      {/* Billboard text content */}
+      <div className="space-y-3">
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cta/10 text-[10px] font-bold text-cta uppercase tracking-wider">
+          Pályázati Hirdetőtábla
+        </span>
+        <h3 className="text-lg font-bold text-black leading-tight group-hover:text-primary transition-colors">
+          Európai Uniós Társfinanszírozású Hitelprogramok
+        </h3>
+        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+          A Horváth Tüzép Kft. forgóeszköz-finanszírozási és árukészlet-bővítési projektjei az Európai Regionális Fejlesztési Alap és a NextGenerationEU alapokból valósulnak meg.
+        </p>
+      </div>
+
+      {/* Button wrapper at bottom */}
+      <div className="mt-2 pt-4 border-t border-gray-100 flex items-center justify-between text-xs sm:text-sm font-semibold text-primary group-hover:text-cta transition-colors w-full">
+        <span>Pályázati részletek megtekintése</span>
+        <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+      </div>
+    </button>
+  );
+}
+
+
 
 const categories = [
   { icon: Hammer, title: "Tégla és falazóanyagok", text: "Kerámia tégla, válaszfal, födémrendszerek." },
@@ -136,6 +276,7 @@ const locations = [
 
 function Home() {
   const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -287,29 +428,9 @@ function Home() {
               </Button>
             </div>
 
-            {/* Service Cards (Mobile view: stacked underneath the buttons) */}
+            {/* Széchenyi Billboard (Mobile view) */}
             <div className="mt-12 lg:hidden">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {services.map((s) => {
-                  const Icon = s.icon;
-                  return (
-                    <div
-                      key={s.title}
-                      className="bg-white border border-gray-100 shadow-sm rounded-xl p-5 flex flex-col gap-3 hover:shadow-md transition-shadow duration-300"
-                    >
-                      <div className="h-10 w-10 rounded-lg bg-primary/5 text-primary flex items-center justify-center shrink-0">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-base text-black">{s.title}</h3>
-                        <p className="mt-1.5 text-sm text-gray-600 leading-relaxed">
-                          {s.text}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <SzechenyiBillboard onClick={() => setModalOpen(true)} />
             </div>
 
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-lg">
@@ -326,29 +447,9 @@ function Home() {
             </div>
           </div>
 
-          {/* Service Cards (Desktop view: 2x2 grid in the right column) */}
+          {/* Széchenyi Billboard (Desktop view) */}
           <div className="hidden lg:block lg:col-span-5 w-full">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {services.map((s) => {
-                const Icon = s.icon;
-                return (
-                  <div
-                    key={s.title}
-                    className="bg-white border border-gray-100 shadow-sm rounded-xl p-5 flex flex-col gap-3 hover:shadow-md transition-shadow duration-300"
-                  >
-                    <div className="h-10 w-10 rounded-lg bg-primary/5 text-primary flex items-center justify-center shrink-0">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-base text-black">{s.title}</h3>
-                      <p className="mt-1.5 text-sm text-gray-600 leading-relaxed">
-                        {s.text}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <SzechenyiBillboard onClick={() => setModalOpen(true)} />
           </div>
         </div>
       </section>
@@ -720,6 +821,105 @@ function Home() {
           </div>
         </div>
       </footer>
+
+      {/* DIALOG / MODAL FOR GRANTS */}
+      <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+        <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto bg-white p-6 sm:p-8 text-black border border-border rounded-2xl shadow-2xl">
+          <DialogHeader className="border-b border-gray-100 pb-4 mb-6">
+            <DialogTitle className="text-2xl sm:text-3xl font-bold text-black flex items-center gap-2">
+              Pályázatok és Projektek
+            </DialogTitle>
+            <p className="text-sm text-gray-600 mt-1">
+              A Horváth Tüzép Kft. európai uniós társfinanszírozású projektjeinek részletes adatai.
+            </p>
+          </DialogHeader>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+            {grantsList.map((g) => (
+              <Card
+                key={g.id}
+                className="bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 p-5 flex flex-col justify-between gap-5 text-black"
+              >
+                <div>
+                  {/* EU & GOV Logos Top Bar */}
+                  <div className="flex items-center justify-between border-b border-gray-100 pb-3 mb-4 gap-2">
+                    <div className="flex items-center gap-1.5">
+                      <HU_CoatOfArms_SVG />
+                      <div className="text-[8px] font-bold text-gray-700 leading-tight uppercase">
+                        Magyarország<br />Kormánya
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-1.5 text-right">
+                      <div className="text-[8px] font-bold text-gray-700 leading-tight">
+                        Európai Unió<br />
+                        <span className="text-[6.5px] font-normal text-gray-500 uppercase font-sans">
+                          {g.fund.includes("NextGen") ? "NextGenerationEU" : "Regionális Fejlesztési Alap"}
+                        </span>
+                      </div>
+                      <EU_Flag_SVG />
+                    </div>
+                  </div>
+
+                  {/* Main Title & ID Badge */}
+                  <div className="space-y-2.5">
+                    <h2 className="text-base font-bold text-black leading-tight">
+                      {g.title}
+                    </h2>
+                    
+                    <div className="inline-flex items-center rounded bg-primary/5 px-2 py-0.5 text-[10px] font-semibold text-primary">
+                      Azonosító: {g.identifier}
+                    </div>
+                  </div>
+
+                  {/* Detailed Data List */}
+                  <div className="mt-5 space-y-3.5 text-xs text-black">
+                    <div className="flex items-start gap-2.5">
+                      <Coins className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <div className="text-[10px] text-gray-500 font-medium">Támogatás összege</div>
+                        <div className="text-sm font-bold text-black">{g.amount}</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2.5">
+                      <FileText className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <div className="text-[10px] text-gray-500 font-medium">Projekt leírása</div>
+                        <p className="text-xs text-gray-900 leading-relaxed mt-0.5">{g.desc}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2.5">
+                      <CheckCircle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <div className="text-[10px] text-gray-500 font-medium">Kedvezményezett</div>
+                        <div className="text-xs font-semibold text-gray-900">{g.beneficiary}</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2.5">
+                      <Calendar className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <div className="text-[10px] text-gray-500 font-medium">Befejezési dátum</div>
+                        <div className="text-xs font-semibold text-gray-900">{g.completion}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Széchenyi 2020 / Széchenyi Terv Bottom Bar */}
+                <div className="border-t border-gray-100 pt-3 mt-1">
+                  <div className="flex items-center justify-between text-[9px] text-gray-500">
+                    <span className="font-extrabold text-gray-800 tracking-wider">SZÉCHENYI TERV</span>
+                    <span className="italic">Befektetés a jövőbe</span>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
